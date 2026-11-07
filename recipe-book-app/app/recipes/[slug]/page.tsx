@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
 import styles from "./page.module.css";
+import Link from "next/link";
 
-export const instant = false
+export const instant = false;
 
 export function generateStaticParams() {
   return [
@@ -95,9 +96,7 @@ export default async function RecipePage({ params }: RecipePageProps) {
     <main className={styles.page}>
       <article className={styles.container}>
         <header className={styles.header}>
-          <a className={styles.backLink} href="/">
-            ← All recipes
-          </a>
+          <Link className={styles.backLink} href="/">← All recipes</Link>
           <p className={styles.eyebrow}>The Recipe Book</p>
           <h1 className={styles.title}>{currentRecipe.title}</h1>
           <ul className={styles.tags}>

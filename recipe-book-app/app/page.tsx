@@ -1,4 +1,5 @@
 import styles from "./page.module.css";
+import Link from "next/link";
 
 /* Some hard coded recipes as a placeholder for now */
 const recipes = [
@@ -26,25 +27,27 @@ export default function Home() {
         <ul className={styles.recipeList}>
           {recipes.map((recipe) => (
             <li key={recipe.id}>
-              <article className={styles.recipeCard}>
-                <div className={styles.photoPlaceholder}>
-                  Photo coming soon
-                </div>
+              <Link className={styles.recipeLink} href={"recipes/"+recipe.id}>
+                <article className={styles.recipeCard}>
+                  <div className={styles.photoPlaceholder}>
+                    Photo coming soon
+                  </div>
 
-                <div className={styles.recipeInfo}>
-                  <h2 className={styles.recipeTitle}>{recipe.title}</h2>
+                  <div className={styles.recipeInfo}>
+                    <h2 className={styles.recipeTitle}>{recipe.title}</h2>
 
-                  <ul
-                    className={styles.tags}
-                  >
-                    {recipe.tags.map((tag) => (
-                      <li key={tag} className={styles.tag}>
-                        {tag}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </article>
+                    <ul
+                      className={styles.tags}
+                    >
+                      {recipe.tags.map((tag) => (
+                        <li key={tag} className={styles.tag}>
+                          {tag}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </article>
+              </Link>
             </li>
           ))}
         </ul>
