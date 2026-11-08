@@ -1,19 +1,6 @@
 import styles from "./page.module.css";
 import Link from "next/link";
-
-/* Some hard coded recipes as a placeholder for now */
-const recipes = [
-  {
-    id: "lemon-pasta",
-    title: "Lemon Herb Pasta",
-    tags: ["Pasta", "Vegetarian"],
-  },
-  {
-    id: "tomato-soup",
-    title: "Roasted Tomato Soup",
-    tags: ["Soup", "Vegetarian"],
-  },
-];
+import { recipes } from "/app/data/recipes.ts"
 
 export default function Home() {
   return (
@@ -25,9 +12,9 @@ export default function Home() {
         </header>
 
         <ul className={styles.recipeList}>
-          {recipes.map((recipe) => (
-            <li key={recipe.id}>
-              <Link className={styles.recipeLink} href={"recipes/"+recipe.id}>
+          {Object.entries(recipes).map(([id,recipe]) => (
+            <li key={id}>
+              <Link className={styles.recipeLink} href={"recipes/"+id}>
                 <article className={styles.recipeCard}>
                   <div className={styles.photoPlaceholder}>
                     Photo coming soon
@@ -35,10 +22,7 @@ export default function Home() {
 
                   <div className={styles.recipeInfo}>
                     <h2 className={styles.recipeTitle}>{recipe.title}</h2>
-
-                    <ul
-                      className={styles.tags}
-                    >
+                    <ul className={styles.tags}>
                       {recipe.tags.map((tag) => (
                         <li key={tag} className={styles.tag}>
                           {tag}

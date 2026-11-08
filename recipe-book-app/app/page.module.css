@@ -44,7 +44,6 @@
 }
 
 .recipeLink:hover .recipeCard {
-  /* border-color: #a64f35; */
   box-shadow: 0 6px 16px rgb(41 67 52 / 20%);
   transform: translateY(-2px);
 }
