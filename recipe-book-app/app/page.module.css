@@ -96,6 +96,31 @@
   font-size: 0.875rem;
 }
 
+.search {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.searchLabel {
+  font-weight: 700;
+}
+
+.searchInput {
+  width: 100%;
+  border: 1px solid #b8b6aa;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  background: #fffefa;
+  color: #294334;
+  font: inherit;
+}
+
+.searchInput:focus-visible {
+  outline: 2px solid #a64f35;
+}
+
 /* Updated properties for when the screen gets too narrow */
 @media (max-width: 40rem) {
   .recipeCard {
