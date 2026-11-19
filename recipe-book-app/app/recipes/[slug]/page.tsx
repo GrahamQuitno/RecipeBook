@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import styles from "./page.module.css";
 import Link from "next/link";
 import { recipes } from "/app/data/recipes.ts"
+import { ingredientToString } from "/app/data/recipes.ts"
 
 export const instant = false;
 
@@ -45,7 +46,7 @@ export default async function RecipePage({ params }: RecipePageProps) {
           </h2>
           <ul className={styles.ingredientList}>
             {currentRecipe.ingredients.map((ingredient) => (
-              <li key={ingredient}>{ingredient}</li>
+              <li key={ingredient.name}>{ingredientToString(ingredient)}</li>
             ))}
           </ul>
         </section>

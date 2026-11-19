@@ -1,18 +1,57 @@
+"use client";
 import styles from "./page.module.css";
 import Link from "next/link";
-import { recipes } from "/app/data/recipes.ts"
-import RecipeList from "/app/recipe-list.tsx"
+import Search from "/app/search.tsx";
+import { useState } from "react";
+import { recipes, type RecipeEntry } from "./data/recipes";
 
 export default function Home() {
+  const [matchingRecipes, setMatchingRecipes] = useState<RecipeEntry[]>(
+    Object.entries(recipes)
+  );
+  function receiveRecipes(recipeList: RecipeEntry[]) {
+    setMatchingRecipes(recipeList);
+  }
+
   return (
     <main className={styles.page}>
-      <div className={styles.container}>
-        <header className={styles.header}>
-          <p className={styles.eyebrow}>The Recipe Book</p>
-          <h1 className={styles.heading}>Recipes</h1>
-        </header>
+      <header className={styles.header}>
+        <p className={styles.eyebrow}>The Recipe Book</p>
+        <h1 className={styles.heading}>Recipes</h1>
+      </header>
 
-        <RecipeList />
+      <div className={styles.searchAndList}>
+
+      <Search filterRecipes={receiveRecipes}/>
+
+      {matchingRecipes.length > 0 ? (
+        <ul className={styles.recipeList}>
+          {matchingRecipes.map(([id, recipe]) => (
+            <li key={id}>
+              <Link className={styles.recipeLink} href={`/recipes/${id}`}>
+                <article className={styles.recipeCard}>
+                  <div className={styles.photoPlaceholder}>
+                    Photo coming soon
+                  </div>
+
+                  <div className={styles.recipeInfo}>
+                    <h2 className={styles.recipeTitle}>{recipe.title}</h2>
+                    <ul className={styles.tags}>
+                      {recipe.tags.map((tag) => (
+                        <li key={tag} className={styles.tag}>
+                          {tag}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </article>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No recipes match those filters.</p>
+      )}
       </div>
     </main>
   );

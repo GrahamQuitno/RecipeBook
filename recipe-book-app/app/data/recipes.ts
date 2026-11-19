@@ -1,23 +1,39 @@
+export type Ingredient = {
+  amount: number;
+  unit: string;
+  name: string;
+  preparation?: string;
+};
+
+export function ingredientToString(ingredient : Ingredient): string{
+  if (ingredient.preparation === undefined) {
+    return `${ingredient.amount} ${ingredient.unit} ${ingredient.name}`;
+  }
+  return `${ingredient.amount} ${ingredient.unit} ${ingredient.preparation} ${ingredient.name}`;
+}
+
 export type Recipe = {
   title: string;
   tags: string[];
-  ingredients: string[];
+  ingredients: Ingredient[];
   instructions: string[];
 };
+
+export type RecipeEntry = [slug: string, recipe: Recipe];
 
 export const recipes: Record<string, Recipe> = {
   "blueberry-muffins": {
     title: "Blueberry Muffins",
     tags: ["Breakfast", "Baking"],
     ingredients: [
-      "2 cups all-purpose flour",
-      "¾ cup sugar",
-      "2 teaspoons baking powder",
-      "½ teaspoon salt",
-      "½ cup butter, melted",
-      "2 eggs",
-      "½ cup milk",
-      "1 cup blueberries",
+      { amount: 2, unit: "cups", name: "all-purpose flour" },
+      { amount: 0.75, unit: "cup", name: "sugar" },
+      { amount: 2, unit: "teaspoons", name: "baking powder" },
+      { amount: 0.5, unit: "teaspoon", name: "salt" },
+      { amount: 0.5, unit: "cup", name: "butter", preparation: "melted" },
+      { amount: 2, unit: "", name: "eggs" },
+      { amount: 0.5, unit: "cup", name: "milk" },
+      { amount: 1, unit: "cup", name: "blueberries" },
     ],
     instructions: [
       "Heat the oven to 375°F (190°C). Line a muffin tin with paper liners.",
@@ -31,14 +47,14 @@ export const recipes: Record<string, Recipe> = {
     title: "Lemon Herb Pasta",
     tags: ["Pasta", "Vegetarian"],
     ingredients: [
-      "12 ounces pasta",
-      "2 tablespoons olive oil",
-      "2 cloves garlic, minced",
-      "1 lemon, zested and juiced",
-      "¼ cup chopped fresh parsley",
-      "½ teaspoon salt",
-      "¼ teaspoon black pepper",
-      "½ cup reserved pasta water",
+      { amount: 12, unit: "ounces", name: "pasta" },
+      { amount: 2, unit: "tablespoons", name: "olive oil" },
+      { amount: 2, unit: "cloves", name: "garlic", preparation: "minced" },
+      { amount: 1, unit: "", name: "lemon", preparation: "zested and juiced" },
+      { amount: 0.25, unit: "cup", name: "fresh parsley", preparation: "chopped" },
+      { amount: 0.5, unit: "teaspoon", name: "salt" },
+      { amount: 0.25, unit: "teaspoon", name: "black pepper" },
+      { amount: 0.5, unit: "cup", name: "pasta water", preparation: "reserved" },
     ],
     instructions: [
       "Bring a large pot of salted water to a boil. Cook the pasta according to the package directions.",
@@ -53,15 +69,15 @@ export const recipes: Record<string, Recipe> = {
     title: "Roasted Tomato Soup",
     tags: ["Soup", "Vegetarian"],
     ingredients: [
-      "2 pounds ripe tomatoes, halved",
-      "1 small yellow onion, roughly chopped",
-      "4 cloves garlic, peeled",
-      "2 tablespoons olive oil",
-      "2 cups vegetable broth",
-      "½ teaspoon salt",
-      "¼ teaspoon black pepper",
-      "¼ cup heavy cream (optional)",
-      "2 tablespoons chopped fresh basil",
+      { amount: 2, unit: "pounds", name: "ripe tomatoes", preparation: "halved" },
+      { amount: 1, unit: "small", name: "yellow onion", preparation: "roughly chopped" },
+      { amount: 4, unit: "cloves", name: "garlic", preparation: "peeled" },
+      { amount: 2, unit: "tablespoons", name: "olive oil" },
+      { amount: 2, unit: "cups", name: "vegetable broth" },
+      { amount: 0.5, unit: "teaspoon", name: "salt" },
+      { amount: 0.25, unit: "teaspoon", name: "black pepper" },
+      { amount: 0.25, unit: "cup", name: "heavy cream", preparation: "optional" },
+      { amount: 2, unit: "tablespoons", name: "fresh basil", preparation: "chopped" },
     ],
     instructions: [
       "Heat the oven to 425°F (220°C). Arrange the tomatoes, onion, and garlic on a baking sheet.",
