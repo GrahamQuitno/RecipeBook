@@ -4,6 +4,51 @@ import { allIngredients } from "./data/ingredients";
 import styles from "./search.module.css";
 import { recipes, type RecipeEntry } from "./data/recipes";
 
+function filterByTitleKeywords(recipeEntries: RecipeEntry[], query: string): RecipeEntry[] {
+  const keywords = query
+    .trim()
+    .toLowerCase()
+    .split(/\s+/)
+    .filter(Boolean);
+
+  if (keywords.length === 0) {
+    return recipeEntries;
+  }
+
+  return recipeEntries.filter(([, recipe]) =>
+    keywords.every((keyword) =>
+      recipe.title.toLowerCase().includes(keyword)
+    )
+  );
+}
+
+function filterByTags(recipeEntries: RecipeEntry[], selectedTags: string[]): RecipeEntry[] {
+  if (selectedTags.length === 0) {
+    return recipeEntries;
+  }
+  return recipeEntries.filter(([, recipe]) =>
+    selectedTags.every((tag) => recipe.tags.includes(tag))
+  );
+}
+
+function filterByIncludeIngredients(recipeEntries: RecipeEntry[], includedIngredients: string[]): RecipeEntry[] {
+  if (includedIngredients.length === 0) {
+    return recipeEntries;
+  }
+  return recipeEntries.filter(([, recipe]) =>
+    includedIngredients.every((ingredient) => recipe.ingredients.some(recipeIngredient => recipeIngredient.name === ingredient))
+  );
+}
+
+function filterByExcludeIngredients(recipeEntries: RecipeEntry[], excludedIngredients: string[]): RecipeEntry[] {
+  if (excludedIngredients.length === 0) {
+    return recipeEntries;
+  }
+  return recipeEntries.filter(([, recipe]) =>
+    excludedIngredients.every((ingredient) => recipe.ingredients.every(recipeIngredient => recipeIngredient.name !== ingredient))
+  );
+}
+
 type ChildProps = {
   filterRecipes: (newRecipes: RecipeEntry[]) => void;
 };
@@ -14,30 +59,14 @@ export default function Search({ filterRecipes }: ChildProps) {
   const [tagQuery, setTagQuery] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
-  const visibleTags = allTags.filter((tag) =>
-    tag.toLowerCase().includes(tagQuery.trim().toLowerCase())
-  );
-
-  const queryWords = query
-  .trim()
-  .toLowerCase()
-  .split(/\s+/)
-  .filter(Boolean);
-
-  const matchingRecipes = Object.entries(recipes).filter(([, recipe]) => {
-    const titleMatches = queryWords.every((word) =>
-      recipe.title.toLowerCase().includes(word)
-    );
-
-    const tagsMatch = selectedTags.every((tag) => recipe.tags.includes(tag));
-
-    return titleMatches && tagsMatch;
-  });
-
   const [includeQuery, setIncludeQuery] = useState("");
   const [excludeQuery, setExcludeQuery] = useState("");
   const [includedIngredients, setIncludedIngredients] = useState<string[]>([]);
   const [excludedIngredients, setExcludedIngredients] = useState<string[]>([]);
+
+  const visibleTags = allTags.filter((tag) =>
+    tag.toLowerCase().includes(tagQuery.trim().toLowerCase())
+  );
 
   const visibleIncludeIngredients = allIngredients.filter((ingredient) =>
     ingredient.toLowerCase().includes(includeQuery.trim().toLowerCase())
@@ -46,6 +75,13 @@ export default function Search({ filterRecipes }: ChildProps) {
   const visibleExcludeIngredients = allIngredients.filter((ingredient) =>
     ingredient.toLowerCase().includes(excludeQuery.trim().toLowerCase())
   );
+
+  const allRecipeEntries: RecipeEntry[] = Object.entries(recipes);
+  const matchingByTitle = filterByTitleKeywords(allRecipeEntries, query);
+  const matchingByTag = filterByTags(matchingByTitle, selectedTags);
+  const matchingByIncludeIngredients = filterByIncludeIngredients(matchingByTag, includedIngredients);
+  const matchingByExcludeIngredients = filterByExcludeIngredients(matchingByIncludeIngredients, excludedIngredients);
+  const matchingRecipes = matchingByExcludeIngredients;
 
   return (
     <>
