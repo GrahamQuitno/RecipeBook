@@ -1,8 +1,9 @@
 import { notFound } from "next/navigation";
 import styles from "./page.module.css";
 import Link from "next/link";
-import { recipes } from "/app/data/recipes.ts"
-import { ingredientToString } from "/app/data/recipes.ts"
+import { recipes } from "/app/data/recipes.ts";
+import IngredientInfo from "./ingredient-info.tsx";
+import { type Recipe } from "/app/data/recipes.ts";
 
 export const instant = false;
 
@@ -20,7 +21,7 @@ type RecipePageProps = {
 
 export default async function RecipePage({ params }: RecipePageProps) {
   const { slug } = await params;
-  const currentRecipe = recipes[slug];
+  const currentRecipe: Recipe = recipes[slug];
 
   if (!currentRecipe) {
     notFound();
@@ -40,16 +41,7 @@ export default async function RecipePage({ params }: RecipePageProps) {
           </ul>
         </header>
 
-        <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>
-            Ingredients
-          </h2>
-          <ul className={styles.ingredientList}>
-            {currentRecipe.ingredients.map((ingredient) => (
-              <li key={ingredient.name}>{ingredientToString(ingredient)}</li>
-            ))}
-          </ul>
-        </section>
+        <IngredientInfo currentRecipe={currentRecipe}/>
 
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>

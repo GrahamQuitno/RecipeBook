@@ -5,11 +5,11 @@ export type Ingredient = {
   preparation?: string;
 };
 
-export function ingredientToString(ingredient : Ingredient): string{
+export function ingredientToString(ingredient: Ingredient, scale: number): string{
   if (ingredient.preparation === undefined) {
-    return `${ingredient.amount} ${ingredient.unit} ${ingredient.name}`;
+    return `${ingredient.amount * scale} ${ingredient.unit} ${ingredient.name}`;
   }
-  return `${ingredient.amount} ${ingredient.unit} ${ingredient.preparation} ${ingredient.name}`;
+  return `${ingredient.amount * scale} ${ingredient.unit} ${ingredient.preparation} ${ingredient.name}`;
 }
 
 export type Recipe = {

@@ -2,4 +2,7 @@
 - Display the filters when sections within the search box are collapsed.
 - Add "Clear Filters" button.
 - Make phone-friendly layout. This will likely mean putting the search box in the same column as the recipe list.
-- Recipe scaler.
+- Create a stylesheet for recipe-browser.tsx since it's copying from page.tsx's stylesheet right now.
+- Also create stylesheet for ingredient-info.tsx.
+- Allow recipe scaler to work with fractions.
+- Make recipe scaler pretty.
