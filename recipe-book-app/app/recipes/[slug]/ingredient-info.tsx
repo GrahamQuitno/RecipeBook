@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
-import styles from "./page.module.css";
 import { ingredientToString } from "/app/data/recipes.ts";
 import { type Recipe } from "/app/data/recipes.ts";
+import styles from "./ingredient-info.module.css";
 
 type ChildProps = {
   currentRecipe: Recipe;
@@ -13,11 +13,17 @@ export default function IngredientInfo({ currentRecipe }: ChildProps) {
 
   return (
     <>
-      <input 
-        type="number"
-        value={scale}
-        onChange={(event) => setScale(Number(event.target.value))}
-      />
+      <div className={styles.scalerBox}>
+        <label htmlFor="scaler">Scale Ingredients:</label>
+        <input
+          className={styles.scalerInput}
+          id="scaler"
+          type="number"
+          value={scale}
+          onChange={(event) => setScale(Number(event.target.value))}
+        />
+        <span className={styles.multiplier}>×</span>
+      </div>
 
       <section className={styles.section}>
         <h2 className={styles.sectionTitle}>

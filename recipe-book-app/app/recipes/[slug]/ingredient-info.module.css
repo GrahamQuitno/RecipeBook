@@ -1,0 +1,42 @@
+.scalerBox {
+  background: #fffefa;
+  padding: 0.5rem 0.75rem;
+  width: fit-content;
+  border: 1px solid #e4dfd3;
+  border-radius: 0.75rem;
+}
+
+.scalerInput {
+  width: 3rem;
+  border: 1px solid #b8b6aa;
+  border-radius: 0.4rem;
+  text-align: center;
+  padding: 0.25rem;
+  margin-left: 0.5rem;
+}
+
+.multiplier {
+  font-weight: 900;
+  margin-left: 0.25rem;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.sectionTitle {
+  margin: 0 0 1rem;
+  font-size: 1.75rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+}
+
+.ingredientList{
+  padding-left: 1.5rem;
+  list-style-type: disc;
+}
+
+.ingredientList li {
+  padding-left: 0.25rem;
+  margin-bottom: 0.75rem;
+}

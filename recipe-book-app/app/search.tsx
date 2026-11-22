@@ -94,9 +94,9 @@ export default function Search({ filterRecipes }: ChildProps) {
         <details>
           <summary>Title Keywords</summary>
 
-          <label htmlFor="recipe-search">Words to find in the recipe title</label>
+          <label htmlFor="title-search">Words to find in the recipe title</label>
           <input
-            id="recipe-search"
+            id="title-search"
             type="search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}

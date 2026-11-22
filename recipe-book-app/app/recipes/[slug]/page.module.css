@@ -69,17 +69,11 @@
   font-size: 1.75rem;
 }
 
-.ingredientList{
-  padding-left: 1.5rem;
-  list-style-type: disc;
-}
-
 .instructionList {
   padding-left: 1.5rem;
   list-style-type: decimal;
 }
 
-.ingredientList li,
 .instructionList li {
   padding-left: 0.25rem;
   margin-bottom: 0.75rem;
