@@ -1,8 +1,8 @@
 .page {
   min-height: 100vh;
   padding: 2rem 1rem 4rem;
-  background: #f7f4ec;
-  color: #294334;
+  background: var(--color-page);
+  color: var(--color-forest);
 }
 
 .header {
@@ -11,7 +11,7 @@
 
 .eyebrow {
   margin: 0 0 0.5rem;
-  color: #a64f35;
+  color: var(--color-terracotta);
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -46,7 +46,7 @@
 }
 
 .recipeLink:hover .recipeCard {
-  box-shadow: 0 6px 16px rgb(41 67 52 / 20%);
+  box-shadow: 0 6px 16px rgb(var(--color-forest-rgb) / 20%);
   transform: translateY(-2px);
 }
 
@@ -54,10 +54,10 @@
   display: flex;
   flex-direction: row;
   overflow: hidden;
-  border: 1px solid #e4dfd3;
+  border: 1px solid var(--color-border);
   border-radius: 1rem;
-  background: #fffefa;
-  box-shadow: 0 2px 6px rgb(41 67 52 / 8%);
+  background: var(--color-surface);
+  box-shadow: 0 2px 6px rgb(var(--color-forest-rgb) / 8%);
   transition: box-shadow 160ms ease, transform 160ms ease;
 }
 
@@ -66,8 +66,8 @@
   height: 12rem;
   width: 12rem;
   place-items: center;
-  background: #e9e4d8;
-  color: #6b7068;
+  background: var(--color-placeholder);
+  color: var(--color-muted);
 }
 
 .recipeInfo {
@@ -77,7 +77,7 @@
 
 .recipeTitle {
   margin: 0 0 1rem;
-  color: #294334;
+  color: var(--color-forest);
   font-family: Georgia, "Times New Roman", serif;
   font-size: 1.5rem;
   font-weight: 400;
@@ -92,9 +92,9 @@
 
 .tag {
   border-radius: 100rem;
-  background: #f3e4dc;
+  background: var(--color-tag-background);
   padding: 0.35rem 0.7rem;
-  color: #7f3926;
+  color: var(--color-terracotta-dark);
   font-size: 0.875rem;
   text-transform: capitalize;
 }
