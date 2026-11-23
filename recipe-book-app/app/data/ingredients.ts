@@ -1,4 +1,4 @@
-import { recipes } from "./recipes";
+import { recipes } from "./recipes.ts";
 
 export const allIngredients = Array.from(
   new Set(

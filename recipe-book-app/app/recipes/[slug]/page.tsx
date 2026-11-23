@@ -1,9 +1,8 @@
 import { notFound } from "next/navigation";
 import styles from "./page.module.css";
 import Link from "next/link";
-import { recipes } from "/app/data/recipes.ts";
 import IngredientInfo from "./ingredient-info.tsx";
-import { type Recipe } from "/app/data/recipes.ts";
+import { recipes, type Recipe } from "../../data/recipes.ts";
 
 export const instant = false;
 

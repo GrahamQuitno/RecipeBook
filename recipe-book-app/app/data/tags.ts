@@ -1,4 +1,4 @@
-import { recipes } from "/app/data/recipes.ts"
+import { recipes } from "./recipes.ts";
 
 const tagSet: Set<string> = new Set<string>();
 

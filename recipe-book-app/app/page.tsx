@@ -1,8 +1,7 @@
 import styles from "./page.module.css";
 import Link from "next/link";
-import { useState } from "react";
 import { recipes, type RecipeEntry } from "./data/recipes";
-import RecipeBrowser from "/app/recipe-browser.tsx";
+import RecipeBrowser from "./recipe-browser.tsx";
 
 export default function Home() {
 

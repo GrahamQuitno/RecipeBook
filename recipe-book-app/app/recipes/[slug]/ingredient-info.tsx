@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import { ingredientToString } from "/app/data/recipes.ts";
-import { type Recipe } from "/app/data/recipes.ts";
+import { ingredientToString } from "../../data/recipes.ts";
+import { type Recipe } from "../../data/recipes.ts";
 import styles from "./ingredient-info.module.css";
 
 type ChildProps = {

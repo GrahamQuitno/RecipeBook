@@ -1,7 +1,7 @@
 "use client";
 import styles from "./page.module.css";
 import Link from "next/link";
-import Search from "/app/search.tsx";
+import Search from "./search.tsx";
 import { useState } from "react";
 import { recipes, type RecipeEntry } from "./data/recipes";
 
