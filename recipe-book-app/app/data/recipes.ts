@@ -1,13 +1,17 @@
 export type Ingredient = {
   amount: number;
-  unit: string;
+  unit?: string;
   name: string;
   preparation?: string;
 };
 
 export function ingredientToString(ingredient: Ingredient, scale: number): string{
-  if (ingredient.preparation === undefined) {
+  if (ingredient.preparation === undefined && ingredient.unit === undefined) {
+    return `${ingredient.amount * scale} ${ingredient.name}`;
+  } else if (ingredient.preparation === undefined) {
     return `${ingredient.amount * scale} ${ingredient.unit} ${ingredient.name}`;
+  } else if (ingredient.unit === undefined) {
+    return `${ingredient.amount * scale} ${ingredient.preparation} ${ingredient.name}`;
   }
   return `${ingredient.amount * scale} ${ingredient.unit} ${ingredient.preparation} ${ingredient.name}`;
 }
@@ -31,7 +35,7 @@ export const recipes: Record<string, Recipe> = {
       { amount: 2, unit: "teaspoons", name: "baking powder" },
       { amount: 0.5, unit: "teaspoon", name: "salt" },
       { amount: 0.5, unit: "cup", name: "butter", preparation: "melted" },
-      { amount: 2, unit: "", name: "eggs" },
+      { amount: 2, name: "eggs" },
       { amount: 0.5, unit: "cup", name: "milk" },
       { amount: 1, unit: "cup", name: "blueberries" },
     ],
@@ -50,7 +54,7 @@ export const recipes: Record<string, Recipe> = {
       { amount: 12, unit: "ounces", name: "pasta" },
       { amount: 2, unit: "tablespoons", name: "olive oil" },
       { amount: 2, unit: "cloves", name: "garlic", preparation: "minced" },
-      { amount: 1, unit: "", name: "lemon", preparation: "zested and juiced" },
+      { amount: 1, name: "lemon", preparation: "zested and juiced" },
       { amount: 0.25, unit: "cup", name: "fresh parsley", preparation: "chopped" },
       { amount: 0.5, unit: "teaspoon", name: "salt" },
       { amount: 0.25, unit: "teaspoon", name: "black pepper" },
