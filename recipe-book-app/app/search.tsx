@@ -1,8 +1,6 @@
 import { useState } from "react";
-import { allTags } from "./data/tags";
-import { allIngredients } from "./data/ingredients";
 import styles from "./search.module.css";
-import { recipes, type RecipeEntry } from "./data/recipes";
+import { type RecipeEntry } from ".data/recipes";
 
 function filterByTitleKeywords(recipeEntries: RecipeEntry[], query: string): RecipeEntry[] {
   const keywords = query
@@ -49,11 +47,25 @@ function filterByExcludeIngredients(recipeEntries: RecipeEntry[], excludedIngred
   );
 }
 
-type ChildProps = {
+type SearchProps = {
+  recipeEntries: RecipeEntry[];
   filterRecipes: (newRecipes: RecipeEntry[]) => void;
 };
 
-export default function Search({ filterRecipes }: ChildProps) {
+export default function Search({ recipeEntries, filterRecipes }: SearchProps) {
+  // Crude way to acquire the tags and ingredients
+  // In the future, I want to acquire them from the tag table and ingredient table, rather than processing data from the ingredient table
+  const allTags = [
+    ...new Set(recipeEntries.flatMap(([, recipe]) => recipe.tags)),
+  ];
+  const allIngredients = [
+    ...new Set(
+      recipeEntries.flatMap(([, recipe]) =>
+        recipe.ingredients.map((ingredient) => ingredient.name)
+      )
+    ),
+  ];
+
   const [query, setQuery] = useState("");
 
   const [tagQuery, setTagQuery] = useState("");
@@ -76,8 +88,7 @@ export default function Search({ filterRecipes }: ChildProps) {
     ingredient.toLowerCase().includes(excludeQuery.trim().toLowerCase())
   );
 
-  const allRecipeEntries: RecipeEntry[] = Object.entries(recipes);
-  const matchingByTitle = filterByTitleKeywords(allRecipeEntries, query);
+  const matchingByTitle = filterByTitleKeywords(recipeEntries, query);
   const matchingByTag = filterByTags(matchingByTitle, selectedTags);
   const matchingByIncludeIngredients = filterByIncludeIngredients(matchingByTag, includedIngredients);
   const matchingByExcludeIngredients = filterByExcludeIngredients(matchingByIncludeIngredients, excludedIngredients);

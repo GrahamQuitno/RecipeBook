@@ -6,3 +6,4 @@
 - Allow recipe scaler to work with fractions.
 - Create converters. Farenheit to Celsius, cups to tablespoons, etc.
 - Add dark mode color palette.
+- Change pages from blocking to something faster. Perhaps streaming certain components. Or caching data.

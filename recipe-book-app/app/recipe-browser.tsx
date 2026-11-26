@@ -3,20 +3,25 @@ import styles from "./page.module.css";
 import Link from "next/link";
 import Search from "./search.tsx";
 import { useState } from "react";
-import { recipes, type RecipeEntry } from "./data/recipes";
+import { type RecipeEntry } from "./data/recipes";
 
-export default function RecipeBrowser() {
+type RecipeBrowserProps = {
+  recipeEntries: RecipeEntry[];
+};
+
+function filterRecipes(recipeList: RecipeEntry[]) {
+  setMatchingRecipes(recipeList);
+}
+
+export default function RecipeBrowser({ recipeEntries }: RecipeBrowserProps) {
   const [matchingRecipes, setMatchingRecipes] = useState<RecipeEntry[]>(
-    Object.entries(recipes)
+    recipeEntries
   );
-  function receiveRecipes(recipeList: RecipeEntry[]) {
-    setMatchingRecipes(recipeList);
-  }
 
   return (
     <>
       <div className={styles.searchAndList}>
-        <Search filterRecipes={receiveRecipes}/>
+        <Search recipeEntries={recipeEntries} filterRecipes={filterRecipes}/>
 
         {matchingRecipes.length > 0 ? (
           <ul className={styles.recipeList}>
