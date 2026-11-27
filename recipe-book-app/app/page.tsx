@@ -2,12 +2,12 @@ import styles from "./page.module.css";
 import Link from "next/link";
 import { type RecipeEntry } from "./data/recipes";
 import RecipeBrowser from "./recipe-browser.tsx";
-import { getRecipesFromSupabase } from "./data/supabase-recipes";
+import { getAllRecipesFromSupabase } from "./data/supabase-recipes";
 
 export const instant = false;
 
 export default async function Home() {
-  const recipeEntries: RecipeEntry[] = await getRecipesFromSupabase();
+  const recipeEntries: RecipeEntry[] = await getAllRecipesFromSupabase();
 
   return (
     <main className={styles.page}>

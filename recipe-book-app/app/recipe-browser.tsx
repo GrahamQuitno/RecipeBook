@@ -9,14 +9,14 @@ type RecipeBrowserProps = {
   recipeEntries: RecipeEntry[];
 };
 
-function filterRecipes(recipeList: RecipeEntry[]) {
-  setMatchingRecipes(recipeList);
-}
-
 export default function RecipeBrowser({ recipeEntries }: RecipeBrowserProps) {
   const [matchingRecipes, setMatchingRecipes] = useState<RecipeEntry[]>(
     recipeEntries
   );
+
+  function filterRecipes(recipeList: RecipeEntry[]) {
+    setMatchingRecipes(recipeList);
+  }
 
   return (
     <>

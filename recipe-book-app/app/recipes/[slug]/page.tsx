@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import styles from "./page.module.css";
 import Link from "next/link";
 import IngredientInfo from "./ingredient-info.tsx";
-import { recipes, type Recipe } from "../../data/recipes.ts";
+import { getRecipeFromSupabase } from "../../data/supabase-recipes.ts";
 
 export const instant = false;
 
@@ -20,7 +20,7 @@ type RecipePageProps = {
 
 export default async function RecipePage({ params }: RecipePageProps) {
   const { slug } = await params;
-  const currentRecipe: Recipe = recipes[slug];
+  const currentRecipe = await getRecipeFromSupabase(slug);
 
   if (!currentRecipe) {
     notFound();

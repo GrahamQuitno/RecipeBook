@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./search.module.css";
-import { type RecipeEntry } from ".data/recipes";
+import { type RecipeEntry } from "./data/recipes.ts";
 
 function filterByTitleKeywords(recipeEntries: RecipeEntry[], query: string): RecipeEntry[] {
   const keywords = query
