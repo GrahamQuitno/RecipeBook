@@ -3,6 +3,7 @@ import styles from "./page.module.css";
 import Link from "next/link";
 import IngredientInfo from "./ingredient-info.tsx";
 import { getRecipeFromSupabase } from "../../data/supabase-recipes.ts";
+import { auth0 } from "../../../utils/auth0/server";
 
 export const instant = false;
 
@@ -21,6 +22,9 @@ type RecipePageProps = {
 export default async function RecipePage({ params }: RecipePageProps) {
   const { slug } = await params;
   const currentRecipe = await getRecipeFromSupabase(slug);
+
+  const session = await auth0.getSession();
+  const isSignedIn = Boolean(session?.user);
 
   if (!currentRecipe) {
     notFound();
@@ -57,6 +61,13 @@ export default async function RecipePage({ params }: RecipePageProps) {
           Photo coming soon
         </div>
       </article>
+
+      <footer>
+        {
+          isSignedIn ? <a href="/auth/logout">Sign Out</a>
+          : <a href="/auth/login">Owner Sign In</a>
+        }
+      </footer>
     </main>
   );
 }

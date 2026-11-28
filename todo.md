@@ -7,3 +7,6 @@
 - Create converters. Farenheit to Celsius, cups to tablespoons, etc.
 - Add dark mode color palette.
 - Change pages from blocking to something faster. Perhaps streaming certain components. Or caching data.
+- Simplify backend calls to supabase. For example, the home page creates a recipe object for every recipe, but all we need is every recipe name with its slug, tags, and ingredient names. We don't need things like the instructions or the ingredient info beyond the name.
+- Change practices to work better at scale, with many many recipes. Current practices work fine because there's only a few recipes, but as more and more recipes get added, these methods will begin to slow down more than other methods.
+- Make the website loading faster. Since switching to the database, page loading has been taking longer because they wait to get back the call the the database first. Finding a way around this will probably involve streaming or caching.
